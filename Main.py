@@ -1,58 +1,108 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from openai import OpenAI
+from groq import Groq
 from dotenv import load_dotenv
+import requests
 import os
+from pydantic import BaseModel
 
-# Carrega variáveis do .env
-load_dotenv()
-
-# Inicializa cliente da OpenAI
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-# Inicializa o app
-app = FastAPI(title="MedBot - Assistente Médico Ético")
 
 load_dotenv()
-api_key = os.getenv("OPENAI_API_KEY")
-print("OPENAI_API_KEY:", api_key)
+
+
+cliente = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
+
+app = FastAPI(title="MedBot - Assistente Médico com Geolocalização")
+
+
+class ChatRequest(BaseModel):
+    message: str
+    cidade: str | None = None  
 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Em produção, troque pelo endereço do front
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
+prompt_sistema = (
+    "Você é um assistente médico virtual ético e acolhedor. "
+    "Sua função é identificar o tipo de especialista ideal com base nos sintomas descritos. "
+    "NUNCA faça diagnósticos nem prescreva medicamentos. "
+    "Apenas indique o tipo de especialista e oriente o paciente a procurar atendimento."
+)
+
+
+def buscar_especialistas(tipo: str, cidade: str = None):
+    base_url = "https://nominatim.openstreetmap.org/search"
+    query = f"{tipo} {cidade}" if cidade else tipo
+    params = {
+        "q": query,
+        "format": "json",
+        "limit": 5,
+        "addressdetails": 1,
+    }
+    headers = {"User-Agent": "MedBot/1.0 (seu_email_real@gmail.com)"}
+
+    resposta = requests.get(base_url, params=params, headers=headers)
+    dados = resposta.json()
+
+    resultados = []
+    for lugar in dados:
+        resultados.append({
+            "nome": lugar.get("display_name", "Nome não disponível"),
+            "lat": lugar.get("lat"),
+            "lng": lugar.get("lon"),
+            "endereco": lugar.get("display_name")
+        })
+    return resultados
+
 
 @app.post("/chat")
-async def chat(request: Request):
-    data = await request.json()
-    user_message = data.get("message", "")
+async def chat(request: ChatRequest):
+    mensagem_usuario = request.message
+    cidade = request.cidade
 
-    if not user_message.strip():
-        return {"response": "Por favor, envie uma mensagem válida."}
 
-    # Prompt base que define o comportamento médico ético
-    system_prompt = (
-        "Você é um assistente médico virtual empático, ético e responsável. "
-        "Forneça informações médicas gerais e oriente o usuário a procurar um profissional de saúde quando necessário. "
-        "Evite diagnósticos, prescrições e prognósticos. "
-        "Responda sempre em linguagem acessível e com tom acolhedor."
-    )
+    if not mensagem_usuario.strip():
+        return {"resposta": "Por favor, envie uma mensagem válida."}
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
+
+    resposta_ia = cliente.chat.completions.create(
+    model="llama-3.1-8b-instant",
+
+
         messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_message}
+            {"role": "system", "content": prompt_sistema},
+            {"role": "user", "content": mensagem_usuario},
         ],
-        temperature=0.6,  # equilíbrio entre criatividade e segurança
+        temperature=0.5,
     )
 
-    reply = response.choices[0].message.content
-    return {"response": reply}
+    resposta_texto = resposta_ia.choices[0].message.content
 
+
+    especialistas = [
+        "cardiologista", "dermatologista", "neurologista", "ortopedista",
+        "ginecologista", "psicólogo", "otorrinolaringologista",
+        "pediatra", "clínico geral", "endocrinologista", "urologista"
+    ]
+
+    tipo_encontrado = next((e for e in especialistas if e in resposta_texto.lower()), "clínico geral")
+
+ 
+    locais = []
+    if cidade:
+        locais = buscar_especialistas(tipo_encontrado, cidade)
+
+    
+    return {
+        "mensagem": resposta_texto,
+        "especialista": tipo_encontrado,
+        "locais": locais
+    }
