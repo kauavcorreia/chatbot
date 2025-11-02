@@ -1,0 +1,123 @@
+/* Estilos Gerais */
+body {
+    font-family: 'Google Sans', Roboto, Arial, sans-serif; 
+    
+    /* Fundo Branco, conforme sua definição, mas você pode mudar para a cor sólida da imagem se preferir: #008069 */
+    background-color: #ffffff; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 800px; 
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    
+    /* Fundo principal do chat: Verde Esmeralda (do seu exemplo) */
+    background-color: #008069; 
+    
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra mais visível */
+}
+
+/* Área de Mensagens */
+.message-window {
+    flex-grow: 1;
+    overflow-y: auto; 
+    padding: 20px;
+    scroll-behavior: smooth;
+    padding-bottom: 90px; /* Espaço extra no final */
+}
+
+.message {
+    /* TRUQUE DA LARGURA FLEXÍVEL: O elemento ocupa apenas o espaço do conteúdo */
+    display: flex; 
+    width: fit-content; 
+    
+    max-width: 80%; /* Limita mensagens longas */
+    margin-bottom: 15px;
+    padding: 12px 18px;
+    border-radius: 18px; /* Cantos arredondados */
+    line-height: 1.5;
+    word-break: break-word; /* Garante que palavras longas quebrem */
+}
+
+/* Estilo para Mensagens do Bot */
+.gemini-message {
+    background-color: #259D89; /* Verde mais claro (Balão do Bot) */
+    color: #ffffff; /* Texto Branco para contraste */
+    
+    border-top-left-radius: 4px; /* Canto não arredondado */
+    
+    margin-right: auto; /* Alinha à esquerda */
+    margin-left: 0;
+}
+
+/* Estilo para Mensagens do Usuário */
+.user-message {
+    background-color: #FFFBC1; /* Amarelo Claro (Balão do Usuário) */
+    color: #000000; /* Texto Preto */
+    
+    border-top-right-radius: 4px; /* Canto não arredondado */
+    
+    margin-left: auto; /* Alinha à direita */
+    margin-right: 0;
+}
+
+/* Área de Entrada (Input) */
+.input-area {
+    display: flex;
+    padding: 15px 20px;
+    /* Linha acima da área de input deve ser discreta, ou pode ser removida se o fundo for a cor principal */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+    align-items: center;
+}
+
+#user-input {
+    flex-grow: 1;
+    border: none;
+    resize: none;
+    padding: 10px;
+    font-size: 16px;
+    max-height: 150px;
+    overflow-y: auto;
+    outline: none; 
+    /* Cor de fundo do input deve contrastar com o #008069 */
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 8px;
+    color: #000000;
+}
+
+#send-button {
+    /* Mantive o azul para o botão de envio como um elemento de destaque, mas você pode mudar para uma cor do tema: background-color: #FFFBC1; */
+    background-color: #1a73e8; 
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+#send-button:hover {
+    background-color: #1669c7;
+}
+
+.send-icon {
+    font-size: 18px;
+    transform: rotate(45deg); 
+    position: relative;
+    left: 2px;
+    top: -1px;
+}
