@@ -46,8 +46,8 @@ Use o espaço de *issues* para relatar bugs, sugerir melhorias ou tirar dúvidas
 
 Agradecimento especial a todas as pessoas incríveis que contribuíram para este projeto 💙
 
-<a href="https://github.com/chatbot/kauavcorreia/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=chatbot/kauavcorreia" />
+<a href="https://github.com/kauavcorreia/chatbot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=kauavcorreia/chatbot" />
 </a>
 
 ## 📄 Licença
