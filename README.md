@@ -29,3 +29,9 @@ Groq API
 dotenv
 
 uvicorn
+
+front-end:
+
+HTML5 / CSS3 / Javascript
+
+Design limpo e responsivo
