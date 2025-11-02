@@ -5,7 +5,7 @@ Humanizy Med é um chatbot inteligente desenvolvido para auxiliar usuários com 
 ### 🎯 Nossa Missão
 
 A Humanizy Med nasceu com o propósito de aproximar a tecnologia da saúde de forma acessível, empática e inteligente.
-Nossa missão é oferecer informações médicas confiáveis e suporte rápido para quem busca orientação sobre bem-estar e primeiros cuidados — sempre com o toque humano que a tecnologia deve ter.
+Nossa missão é oferecer informações médicas confiáveis e suporte rápido para quem busca orientação sobre bem-estar e primeiros cuidados, sempre com o toque humano que a tecnologia deve ter.
 
 ---
 
@@ -14,7 +14,7 @@ Nossa missão é oferecer informações médicas confiáveis e suporte rápido p
 O projeto Humanizy Med foi desenvolvido com foco em desempenho, simplicidade e integração com inteligência artificial
 As principais tecnologias utilizadas incluem
 
-🐍 Python 3.11+ – linguagem principal do projeto
+🐍 Python – linguagem principal do projeto
 
 ⚡ FastAPI – framework moderno e rápido para criação de APIs
 
