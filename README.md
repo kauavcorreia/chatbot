@@ -1,37 +1,61 @@
+<h1>Humanizy Med</h1>
+
 Humanizy Med é um chatbot inteligente desenvolvido para auxiliar usuários com informações médicas gerais e orientação básica sobre saúde.
-O projeto combina inteligência artificial, FastAPI e integração com geolocalização, permitindo respostas contextuais e personalizadas com base na cidade do usuário.
 
+### 🎯 Nossa Missão
 
-🧠 Funcionalidades
+A Humanizy Med nasceu com o propósito de aproximar a tecnologia da saúde de forma acessível, empática e inteligente.
+Nossa missão é oferecer informações médicas confiáveis e suporte rápido para quem busca orientação sobre bem-estar e primeiros cuidados — sempre com o toque humano que a tecnologia deve ter.
 
-💬 Chat inteligente com IA médica (baseado em Groq API / LLMs)
+---
 
-📍 Geolocalização — respostas adaptadas à cidade informada
+## 🚀 Tecnologias Utilizadas
 
-🌐 Integração Front + Back-end (HTML/CSS/JS + FastAPI)
+O projeto Humanizy Med foi desenvolvido com foco em desempenho, simplicidade e integração com inteligência artificial
+As principais tecnologias utilizadas incluem
 
-⚙️ API REST com suporte a CORS
+🐍 Python 3.11+ – linguagem principal do projeto
 
-🏥 Possibilidade de expandir para consultas, emergências e recomendações locais
+⚡ FastAPI – framework moderno e rápido para criação de APIs
 
-*🧩 Tecnologias Utilizadas*
+🧠 Groq API – processamento de linguagem natural e respostas inteligentes
 
-Back-end:
+🔑 dotenv – gerenciamento de variáveis de ambiente
 
-Python 3.11+
+🚀 Uvicorn – servidor leve e eficiente para rodar a aplicação
 
-FastAPI
+🧰 Git e GitHub – versionamento e colaboração do código
 
-Pydantic
+🧪 Postman – testes e validação das rotas da API
 
-Groq API
+🎨 HTML, CSS e JavaScript – interface simples e responsiva
 
-dotenv
+---
 
-uvicorn
+## 💬 Comunidade e Suporte
 
-front-end:
+Junte-se às nossas discussões da comunidade no GitHub para compartilhar ideias, fazer perguntas ou sugerir melhorias. Vamos construir algo incrível juntos!
 
-HTML5 / CSS3 / Javascript
+[![Abrir Issues](https://img.shields.io/badge/Abrir%20Issues-blue?style=for-the-badge&logo=github)](https://github.com/kauavcorreia/chatbot/issues)
 
-Design limpo e responsivo
+Use o espaço de *issues* para relatar bugs, sugerir melhorias ou tirar dúvidas sobre o projeto 💬
+
+---
+
+## 👥 Contribuidores
+
+Agradecimento especial a todas as pessoas incríveis que contribuíram para este projeto 💙
+
+<a href="https://github.com/chatbot/kauavcorreia/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=chatbot/kauavcorreia" />
+</a>
+
+## 📄 Licença
+
+Este projeto é open-source e está disponível sob a Licença MIT. Sinta-se livre para usar, modificar e distribuir para projetos pessoais ou comerciais.
+
+---
+
+<div align="center">
+  <p>Feito com ❤️ por <a href="https://github.com/marconi-prog">Marconi Farias</a></p>
+</div>
