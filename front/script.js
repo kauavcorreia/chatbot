@@ -54,11 +54,11 @@ async function sendMessage() {
         const respostaFormatada =
             `Especialista recomendado: ${data.especialista}\n\n${data.mensagem}`;
 
-        addMessage("gemini", respostaFormatada);
+        addMessage("groq", respostaFormatada);
     } catch (error) {
         console.error("Erro:", error);
         messageWindow.removeChild(thinking);
-        addMessage("gemini", "❌ Erro ao conectar ao servidor.");
+        addMessage("groq", "❌ Erro ao conectar ao servidor.");
     }
 }
 

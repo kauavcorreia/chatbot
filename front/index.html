@@ -81,7 +81,7 @@
         }
 
         #send-button {
-            background-color: #1a73e8;
+            background-color: #25cfb5;
             color: white;
             border: none;
             border-radius: 50%;
@@ -113,7 +113,7 @@
         <div class="message-window" id="message-window"></div>
 
         <div class="input-area">
-            <textarea id="user-input" placeholder="Pergunte-me algo..."></textarea>
+            <textarea id="user-input" placeholder="como podemos lhe ajudar?"></textarea>
             <button id="send-button">
                 <span class="send-icon">➤</span>
             </button>
@@ -161,11 +161,11 @@
 
                 const data = await response.json();
                 messageWindow.removeChild(thinking);
-                addMessage("gemini", data.mensagem || "Erro ao interpretar resposta.");
+                addMessage("groq", data.mensagem || "Erro ao interpretar resposta.");
 
             } catch (err) {
                 messageWindow.removeChild(thinking);
-                addMessage("gemini", "Erro ao conectar ao servidor.");
+                addMessage("groq", "Erro ao conectar ao servidor.");
             }
         }
     </script>
