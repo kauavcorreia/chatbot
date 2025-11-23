@@ -7,20 +7,47 @@ import json
 from pydantic import BaseModel
 
 
-load_dotenv()
+
+load_dotenv() #PUXA A API KEY no .env
 
 
-cliente = Groq(api_key=os.getenv("GROQ_API_KEY"))
+GROQ_API_KEY = Groq(api_key=os.getenv("GROQ_API_KEY"))
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 
 app = FastAPI(title="MedBot - Assistente Médico Inteligente")
 
 
-class ChatRequest(BaseModel):
+
+class ChatRequest(BaseModel): 
     message: str
 
 
-#  CORS liberado para qualquer frontend
+local_usuario = {
+    "cidade": None        
+}
+
+def buscar_clinicas(especialidade: str, cidade: str):
+    url = (
+        "https://maps.googleapis.com/maps/api/place/textsearch/json"
+        f"?query={especialidade}+em+{cidade}"
+        f"&key={GOOGLE_API_KEY}"
+    )
+
+    requests = requests.get(url).json()
+    
+    clinicas = []
+
+    for item in requests.get("results", [])[:5]:
+        clinicas.append({
+            "nome": item.get("name"),
+            "endereco": item.get("formatted_address"),
+            "rating": item.get("rating")
+        })
+
+    return clinicas
+
+# PERMITE CONEXOES COM O FRONT-END
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -45,9 +72,10 @@ prompt_sistema = (
 )
 
 
-
+# ROTA PRINCIPAL DO CHAT
 @app.post("/chat")
 async def chat(request: ChatRequest):
+
 
     mensagem_usuario = request.message.strip()
 
@@ -58,7 +86,7 @@ async def chat(request: ChatRequest):
         }
 
 
-    resposta_ia = cliente.chat.completions.create(
+    resposta_ia = GROQ_API_KEY.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
             {"role": "system", "content": prompt_sistema},
