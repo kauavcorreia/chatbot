@@ -55,7 +55,7 @@ Agradecimento especial a todas as pessoas incríveis que contribuíram para este
 Este projeto é open-source e está disponível sob a Licença MIT. Sinta-se livre para usar, modificar e distribuir para projetos pessoais ou comerciais.
 
 ---
-
 <div align="center">
   <p>Feito com ❤️ por <a href="https://github.com/marconi-prog">Marconi Farias</a></p>
 </div>
+
